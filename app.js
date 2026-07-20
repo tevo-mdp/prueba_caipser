@@ -1,8 +1,8 @@
 // ==========================================
 // CONFIGURACIÓN INICIAL
 // ==========================================
-const URL_CSV_DIRECTO = "https://raw.githubusercontent.com/TU-USUARIO/TU-REPOSITORIO/main/productos.csv"; 
-const MI_NUMERO_WHATSAPP = "5492235310709"; 
+const URL_CSV_DIRECTO = "https://raw.githubusercontent.com/Ttevo-mdp/prueba_caipser/main/productos.csv"; 
+const MI_NUMERO_WHATSAPP = "5491123456789"; 
 
 let productos = [];
 let carrito = []; // Estructura: [{ producto, cantidad }]
@@ -11,7 +11,7 @@ let categoriaActiva = "Todas";
 let productoModalActual = null;
 
 // ==========================================
-// 1. OBTENER DÓLAR BLUE
+// 1. OBTENER DÓLAR BLUE EN TIEMPO REAL
 // ==========================================
 async function obtenerDolar() {
     try {
@@ -149,10 +149,17 @@ function abrirModal(id) {
     document.getElementById('modal-imagen').src = prod.imagen;
     document.getElementById('modal-categoria').innerText = prod.categoria || 'Producto';
     document.getElementById('modal-nombre').innerText = prod.nombre;
+    
+    // Carga la descripción del CSV
+    const elDesc = document.getElementById('modal-descripcion');
+    if (elDesc) {
+        elDesc.innerText = prod.descripcion || 'Sin descripción disponible.';
+    }
+
     document.getElementById('modal-precio-min').innerText = `$${pMinARS.toLocaleString('es-AR')}`;
     document.getElementById('modal-precio-may').innerText = `$${pMayARS.toLocaleString('es-AR')}`;
 
-    // Resetear la cantidad a 1
+    // Resetear cantidad a 1
     const inputCant = document.getElementById('modal-cantidad');
     if (inputCant) inputCant.value = 1;
 
