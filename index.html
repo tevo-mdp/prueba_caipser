@@ -3,96 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Mayorista</title>
-    <!-- Tailwind CSS para el diseño -->
+    <title>Catálogo Mayorista Premium</title>
+    
+    <!-- Fuentes de Google: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- PapaParse para leer el CSV -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { brand: '#000000', accent: '#10B981' }
+                }
+            }
+        }
+    </script>
+
+    <!-- PapaParse para el CSV -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <style>
+        /* Ocultar barra de scroll en el carrito para que se vea más limpio */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans min-h-screen flex flex-col">
+<body class="bg-[#F8F9FA] text-gray-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand selection:text-white">
 
-    <!-- Encabezado / Navbar -->
-    <header class="bg-black text-white p-4 sticky top-0 z-20 shadow-md">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div>
-                <h1 class="text-xl font-bold tracking-wide">CATÁLOGO MAYORISTA</h1>
-                <p class="text-xs text-gray-400">Precios actualizados en pesos (ARS)</p>
+    <!-- Navbar con efecto Glassmorphism -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-brand text-white flex items-center justify-center rounded-lg font-bold text-xl">
+                    M
+                </div>
+                <div>
+                    <h1 class="text-lg font-extrabold tracking-tight text-gray-900 leading-none">CATÁLOGO MAYORISTA</h1>
+                    <p class="text-[10px] text-gray-500 font-medium uppercase tracking-wider mt-0.5">Tienda Oficial</p>
+                </div>
             </div>
-            <!-- Indicador rápido de carrito en móviles -->
-            <div class="md:hidden flex items-center gap-1 bg-green-600 px-3 py-1 rounded-full text-xs font-bold">
-                <span>🛒 Total: $</span>
-                <span id="total-precio-mobile">0</span>
+
+            <!-- Total Móvil -->
+            <div class="md:hidden flex items-center gap-2 bg-gray-900 text-white px-4 py-1.5 rounded-full text-sm font-semibold shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                <span>$<span id="total-precio-mobile">0</span></span>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Contenido Principal -->
-    <main class="max-w-6xl mx-auto p-4 w-full flex-grow">
+    <!-- Contenedor Principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
         
-        <!-- Banner Informativo -->
-        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-3 rounded-lg mb-6 shadow text-center text-sm font-semibold">
-            ⚡ COMPRA MAYORISTA A PARTIR DE 5 PRODUCTOS SURTIDOS ⚡
+        <!-- Banner Promocional -->
+        <div class="bg-gray-900 rounded-2xl p-6 sm:p-8 mb-8 shadow-lg relative overflow-hidden flex flex-col sm:flex-row items-center justify-between border border-gray-800">
+            <div class="relative z-10 text-center sm:text-left mb-4 sm:mb-0">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">Desbloqueá precios exclusivos.</h2>
+                <p class="text-gray-400 text-sm sm:text-base font-medium">Llevá <span class="text-white font-bold bg-white/20 px-2 py-0.5 rounded">5 o más artículos</span> surtidos y ahorrá al instante.</p>
+            </div>
+            <div class="relative z-10">
+                <span class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-gray-900 bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default">
+                    Beneficio Mayorista Activo
+                </span>
+            </div>
+            <!-- Decoración abstracta de fondo -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white opacity-5 blur-3xl"></div>
         </div>
 
-        <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex flex-col lg:flex-row gap-8">
             
-            <!-- Columna Izquierda: Productos -->
-            <section class="w-full md:w-3/4">
-                
-                <!-- Grilla de Productos -->
-                <div id="contenedor-productos" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Los productos se inyectan acá automáticamente desde app.js -->
-                    <div class="col-span-full text-center py-12 text-gray-500">
-                        Cargando catálogo de productos...
+            <!-- SECCIÓN IZQUIERDA: PRODUCTOS -->
+            <section class="w-full lg:w-2/3 xl:w-3/4">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold text-gray-900">Nuestros Productos</h3>
+                    <span class="text-xs font-medium text-gray-500 bg-gray-200 px-3 py-1 rounded-full">Actualizado hoy</span>
+                </div>
+
+                <div id="contenedor-productos" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                    <!-- Esqueleto de carga -->
+                    <div class="col-span-full py-20 flex flex-col items-center justify-center text-gray-400">
+                        <svg class="animate-spin h-8 w-8 text-gray-300 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <p class="text-sm font-medium">Cargando catálogo...</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Columna Derecha: Carrito y Checkout -->
-            <aside class="w-full md:w-1/4">
-                <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200 sticky top-20">
+            <!-- SECCIÓN DERECHA: CARRITO (Sticky) -->
+            <aside class="w-full lg:w-1/3 xl:w-1/4">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-24">
                     
-                    <h2 class="text-lg font-bold border-b pb-2 mb-3 flex justify-between items-center">
-                        <span>Tu Pedido</span>
-                        <span class="text-xs font-normal text-gray-500">WhatsApp</span>
+                    <h2 class="text-lg font-extrabold text-gray-900 flex items-center gap-2 mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" /></svg>
+                        Resumen de Pedido
                     </h2>
 
-                    <!-- Lista de productos agregados -->
-                    <div id="lista-carrito" class="max-h-60 overflow-y-auto mb-3 space-y-1 pr-1">
-                        <p class="text-xs text-gray-400 text-center py-4">El carrito está vacío</p>
+                    <!-- Aviso Mayorista Dinámico -->
+                    <div id="aviso-mayorista" class="text-xs font-semibold text-gray-600 mb-4 bg-gray-100 p-3 rounded-lg border border-gray-200 text-center transition-colors">
+                        Calculando beneficios...
                     </div>
 
-                    <!-- Cartel dinámico Mayorista/Minorista -->
-                    <div id="aviso-mayorista" class="text-xs font-medium text-amber-700 mb-3 bg-amber-50 p-2 rounded text-center">
-                        Llevá 5 productos para acceder a precio mayorista.
+                    <!-- Lista de productos en carrito -->
+                    <div id="lista-carrito" class="max-h-64 overflow-y-auto no-scrollbar mb-4 space-y-2 pr-2">
+                        <div class="py-8 text-center">
+                            <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                            </div>
+                            <p class="text-sm font-medium text-gray-400">Tu carrito está vacío</p>
+                        </div>
                     </div>
 
-                    <!-- Total acumulado -->
-                    <div class="flex justify-between items-center text-lg font-black border-t pt-2 mb-4">
-                        <span>Total:</span>
-                        <span class="text-green-600">$<span id="total-precio">0</span></span>
+                    <!-- Total -->
+                    <div class="flex justify-between items-end py-4 border-t border-gray-100 mb-6">
+                        <span class="text-sm font-medium text-gray-500">Total a pagar:</span>
+                        <span class="text-2xl font-black text-gray-900 tracking-tight">$<span id="total-precio">0</span></span>
                     </div>
 
-                    <!-- Formulario con datos del cliente -->
-                    <div class="space-y-2 border-t pt-3 mb-4">
-                        <p class="text-xs font-bold text-gray-600">DATOS DE ENTREGA:</p>
-                        <input type="text" id="cliente-nombre" placeholder="Nombre y Apellido *" class="w-full p-2 border rounded text-xs focus:outline-none focus:ring-1 focus:ring-black">
-                        <input type="text" id="cliente-direccion" placeholder="Dirección / Localidad *" class="w-full p-2 border rounded text-xs focus:outline-none focus:ring-1 focus:ring-black">
-                        <input type="text" id="cliente-nota" placeholder="Notas o aclaraciones (opcional)" class="w-full p-2 border rounded text-xs focus:outline-none focus:ring-1 focus:ring-black">
+                    <!-- Formulario Cliente -->
+                    <div class="space-y-3 mb-6">
+                        <label class="block">
+                            <span class="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Nombre Completo</span>
+                            <input type="text" id="cliente-nombre" placeholder="Ej: Juan Pérez" class="mt-1 block w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:bg-white focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors">
+                        </label>
+                        <label class="block">
+                            <span class="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Dirección de Entrega</span>
+                            <input type="text" id="cliente-direccion" placeholder="Calle, Número, Localidad" class="mt-1 block w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:bg-white focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors">
+                        </label>
+                        <label class="block">
+                            <span class="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Nota (Opcional)</span>
+                            <input type="text" id="cliente-nota" placeholder="Aclaraciones del pedido..." class="mt-1 block w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:bg-white focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors">
+                        </label>
                     </div>
 
-                    <!-- Botón de Envío -->
-                    <button onclick="enviarWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2 transition shadow-sm">
-                        <span>Enviar por WhatsApp</span>
+                    <!-- Botón Enviar -->
+                    <button onclick="enviarWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#1EBE5A] text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-transform transform active:scale-95 shadow-md shadow-green-500/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.88-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        Pedir por WhatsApp
                     </button>
-                    <p class="text-[10px] text-gray-400 text-center mt-2">No requiere registrarse ni iniciar sesión.</p>
+                    <p class="text-[10px] font-medium text-gray-400 text-center mt-3 flex items-center justify-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
+                        Tus datos no se guardan en ningún servidor
+                    </p>
                 </div>
             </aside>
 
         </div>
     </main>
 
-    <!-- Script principal de la aplicación -->
+    <!-- Footer Minimalista -->
+    <footer class="bg-white border-t border-gray-100 py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="w-8 h-8 bg-gray-900 text-white flex items-center justify-center rounded-lg font-bold text-sm mx-auto mb-3">M</div>
+            <p class="text-xs font-semibold text-gray-900 mb-1">Catálogo Online V2.0</p>
+            <p class="text-[11px] text-gray-400">Desarrollado para gestión rápida de pedidos por WhatsApp.</p>
+        </div>
+    </footer>
+
+    <!-- Script de lógica -->
     <script src="app.js"></script>
 </body>
 </html>
