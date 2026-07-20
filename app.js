@@ -2,7 +2,7 @@
 // CONFIGURACIÓN INICIAL
 // ==========================================
 const URL_CSV_DIRECTO = "https://raw.githubusercontent.com/Ttevo-mdp/prueba_caipser/main/productos.csv"; 
-const MI_NUMERO_WHATSAPP = "5491123456789"; 
+const MI_NUMERO_WHATSAPP = "5492235310709"; 
 
 let productos = [];
 let carrito = []; // Estructura: [{ producto, cantidad }]
