@@ -45,7 +45,7 @@ id,nombre,precio_minorista,precio_mayorista,categoria,stock,imagen,descripcion
 44,Yara Rosa 100ml,31,30,Perfumes Femeninos,10,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Fragancia viral dulce y cremosa con orquidea vainilla y notas atalcadas ultra femeninas.
 45,Yara Candy 100ml,31,30,Perfumes Femeninos,1,https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500,Version golosa y frutal con notas de golosinas frutales jarabe de fresa y vainilla.
 46,Afnan 9PM 100ml,45,36,Perfumes Masculinos,0,https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=500,Perfume masculino nocturno dulce y seductor con manzana canela y vainilla intensa.
-47,Asad Bourbon 100ml,50,41,Perfumes Masculinos0,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Aroma amaderado calido con notas de bourbon pimienta negra y vainilla especiada.
+47,Asad Bourbon 100ml,50,41,Perfumes Masculinos,0,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Aroma amaderado calido con notas de bourbon pimienta negra y vainilla especiada.
 48,Club De Nuit Intense Man 100ml,55,45,Perfumes Masculinos,14,https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500,Clasico de proyeccion alta con notas de limon piña abedul y almizcle ahumado.
 49,Liquid Brun French Avenue 100ml,70,58,Perfumes Masculinos,8,https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500,Perfume gourmet ultra elegante con canela flor de azahar praline y vainilla.
 50,Bharara King 100ml,95,80,Perfumes Masculinos,0,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Fragancia de lujo potente con explosion citrica y fondo amaderado dulce de gran estela.
