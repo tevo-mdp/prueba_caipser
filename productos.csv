@@ -11,7 +11,7 @@ id,nombre,precio_minorista,precio_mayorista,categoria,stock,imagen,descripcion
 10,Sublime Kit 3 Piezas,55,46,Perfumes Femeninos,0,https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500,Set exclusivo que incluye fragancia crema corporal e hidratante ideal para regalo.
 11,Tropical Vibe Rayhaan 100ml,52,43,Perfumes Unisex,0,https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=500,Perfume unisex vibrante con acordes de frutas tropicales y brisa marina refrescante.
 12,Hawas Tropical 100ml,60,50,Perfumes Masculinos,0,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Fragancia masculina fresca con notas citricas frutales y fondo acuatico especiado.
-13,Khamrah Qahwa 100ml,75,63,Perfumes Masculinos,0,https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500,Aroma calido e intenso de cafe tostado canela y especias dulces orientales.
+13,Khamrah Qahwa 100ml,75,63,Perfumes Masculinos,0,https://i.ibb.co/93m70CSS/PERFUME-LATTAFA-KHAMRAH-QAHWA-100-ML.png,Aroma calido e intenso de cafe tostado canela y especias dulces orientales.
 14,Lattafa Pride Win Trophy 100ml,38,30,Perfumes Masculinos,0,https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500,Perfume masculino audaz con notas de piña especias finas y madera ahumada.
 15,Yeah Man EDP 100ml,32,25,Perfumes Masculinos,0,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Fragancia moderna juvenil y fresca con notas de manzana verde salvia y cedro.
 16,Erba Pura Mini 25ml,16,11,Miniaturas Arabes,0,https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500,Version compacta del famoso perfume unisex frutal y almizclado de alta fijacion.
@@ -42,8 +42,8 @@ id,nombre,precio_minorista,precio_mayorista,categoria,stock,imagen,descripcion
 41,Eclaire Lattafa 100ml,35,34,Perfumes Femeninos,7,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Perfume dulce irresistible con notas de caramelo leche tibia miel y vainilla.
 42,Odyssey Mandarin Sky 100ml,36,35,Perfumes Masculinos,8,https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500,Aroma masculino dulce citrico con mandarina caramelo salado y haba tonka.
 43,Rave Now Black 100ml,38,31,Perfumes Masculinos,0,https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500,Perfume frutal potente con notas destacadas de piña fresca musgo y madera ahumada.
-44,Yara Rosa 100ml,31,30,Perfumes Femeninos,10,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Fragancia viral dulce y cremosa con orquidea vainilla y notas atalcadas ultra femeninas.
-45,Yara Candy 100ml,31,30,Perfumes Femeninos,1,https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500,Version golosa y frutal con notas de golosinas frutales jarabe de fresa y vainilla.
+44,Yara Rosa 100ml,31,30,Perfumes Femeninos,10,https://i.ibb.co/CKqSKj2S/PERFUME-LATTAFA-YARA-ROSA-100-ML.png,Fragancia viral dulce y cremosa con orquidea vainilla y notas atalcadas ultra femeninas.
+45,Yara Candy 100ml,31,30,Perfumes Femeninos,1,https://i.ibb.co/ccmSqHyt/PERFUME-LATTAFA-YARA-CANDY-100-ML.png,Version golosa y frutal con notas de golosinas frutales jarabe de fresa y vainilla.
 46,Afnan 9PM 100ml,45,36,Perfumes Masculinos,0,https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=500,Perfume masculino nocturno dulce y seductor con manzana canela y vainilla intensa.
 47,Asad Bourbon 100ml,50,41,Perfumes Masculinos,0,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Aroma amaderado calido con notas de bourbon pimienta negra y vainilla especiada.
 48,Club De Nuit Intense Man 100ml,55,45,Perfumes Masculinos,14,https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500,Clasico de proyeccion alta con notas de limon piña abedul y almizcle ahumado.
