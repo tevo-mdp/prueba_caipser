@@ -1,12 +1,12 @@
 id,nombre,precio_minorista,precio_mayorista,categoria,stock,imagen,descripcion
-1,Midnight Bloom Body Splash 250ml,29,27,Body Splash,5,https://i.ibb.co/yctKKgvq/VICTORIA-SECRET-BODY-SPLASH-RUSH-CLASICO-250-ML.png,Fragancia corporal con notas florales nocturnas y toques de vainilla dulce. Ideal para uso diario.
-2,Temptation Body Splash 250ml,29,27,Body Splash,5,https://i.ibb.co/4gjk4CtT/VICTORIA-SECRET-BODY-SPLASH-TEMPTATION-CLASICO-250-ML.png ,Aroma fresco y frutal con dejos de manzana verde y saguaro. Sensacion refrescante e intensa.
-3,Love Spell Body Splash 250ml,29,27,Body Splash,5,https://i.ibb.co/MkFsz3hf/VICTORIA-SECRET-BODY-SPLASH-LOVE-SPELL-CLASICO-250-ML.png,Clasico aroma de flor de cerezo y durazno fresco. Dulce cautivador y de alta duracion.
-4,Velvet Petals Body Splash 250ml,29,27,Body Splash,5,https://i.ibb.co/G38Xmftd/VICTORIA-SECRET-BODY-SPLASH-VELVET-PETALS-250-ML.png,Notas de flores terciopeladas y glaseado de almendras. Dulzura elegante y muy suave.
-5,Coconut Passion Body Splash 250ml,29,27,Body Splash,5,,Mezcla sensual de coco calido y vainilla dulce. Aroma tropical irresistible.
-6,Amber Romance Body Splash 250ml,29,27,Body Splash,5,https://i.ibb.co/VWycRGnw/VICTORIA-SECRET-BODY-SPLASH-AMBER-ROMANCE-CLASICO-250-ML.png,Notas profundas de ambar y crema inglesa. Aroma calido acogedor y envolvente.
-7,Bare Vanilla Body Splash 250ml,29,27,Body Splash,5,https://i.ibb.co/DHMh91g2/VICTORIA-SECRET-BODY-SPLASH-BARE-VAINILLA-CLASICO-250-ML.png,Vainilla batida y cashmere suave. Una fragancia dulce reconfortante y moderna.
-8,Pure Seduction Body Splash 250ml,29,27,Body Splash,5,https://i.ibb.co/ynTQXDSP/VICTORIA-SECRET-BODY-SPLASH-PURE-SEDUCTION-CLASICO-250-ML.png,Aroma frutal intenso con ciruela roja exprimida y peonia dulce.
+1,Midnight Bloom Body Splash 250ml,20,19,Body Splash,5,https://i.ibb.co/yctKKgvq/VICTORIA-SECRET-BODY-SPLASH-RUSH-CLASICO-250-ML.png,Fragancia corporal con notas florales nocturnas y toques de vainilla dulce. Ideal para uso diario.
+2,Temptation Body Splash 250ml,20,19,Body Splash,5,https://i.ibb.co/4gjk4CtT/VICTORIA-SECRET-BODY-SPLASH-TEMPTATION-CLASICO-250-ML.png ,Aroma fresco y frutal con dejos de manzana verde y saguaro. Sensacion refrescante e intensa.
+3,Love Spell Body Splash 250ml,20,19,Body Splash,5,https://i.ibb.co/MkFsz3hf/VICTORIA-SECRET-BODY-SPLASH-LOVE-SPELL-CLASICO-250-ML.png,Clasico aroma de flor de cerezo y durazno fresco. Dulce cautivador y de alta duracion.
+4,Velvet Petals Body Splash 250ml,20,19,Body Splash,5,https://i.ibb.co/G38Xmftd/VICTORIA-SECRET-BODY-SPLASH-VELVET-PETALS-250-ML.png,Notas de flores terciopeladas y glaseado de almendras. Dulzura elegante y muy suave.
+5,Coconut Passion Body Splash 250ml,20,19,Body Splash,5,,Mezcla sensual de coco calido y vainilla dulce. Aroma tropical irresistible.
+6,Amber Romance Body Splash 250ml,20,19,Body Splash,5,https://i.ibb.co/VWycRGnw/VICTORIA-SECRET-BODY-SPLASH-AMBER-ROMANCE-CLASICO-250-ML.png,Notas profundas de ambar y crema inglesa. Aroma calido acogedor y envolvente.
+7,Bare Vanilla Body Splash 250ml,20,19,Body Splash,5,https://i.ibb.co/DHMh91g2/VICTORIA-SECRET-BODY-SPLASH-BARE-VAINILLA-CLASICO-250-ML.png,Vainilla batida y cashmere suave. Una fragancia dulce reconfortante y moderna.
+8,Pure Seduction Body Splash 250ml,20,19,Body Splash,5,https://i.ibb.co/ynTQXDSP/VICTORIA-SECRET-BODY-SPLASH-PURE-SEDUCTION-CLASICO-250-ML.png,Aroma frutal intenso con ciruela roja exprimida y peonia dulce.
 9,Habik Fem Perfume 100ml,48,39,Perfumes Femeninos,0,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Fragancia femenina elegante con notas florales orientales y fondo amaderado suave.
 10,Sublime Kit 3 Piezas,55,46,Perfumes Femeninos,0,https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500,Set exclusivo que incluye fragancia crema corporal e hidratante ideal para regalo.
 11,Tropical Vibe Rayhaan 100ml,52,43,Perfumes Unisex,0,https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=500,Perfume unisex vibrante con acordes de frutas tropicales y brisa marina refrescante.
@@ -27,25 +27,25 @@ id,nombre,precio_minorista,precio_mayorista,categoria,stock,imagen,descripcion
 26,La Rouge Baroque 30ml,15,9,Miniaturas Arabes,0,https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500,Miniatura inspirada en acordes lujosos de azafran jazmin y ambar gris.
 27,Olivia Mini 30ml,16,9,Miniaturas Arabes,0,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Fragancia femenina elegante con notas de vainilla salada y jazmin acuatico.
 28,Pink Shimmer Secret 30ml,16,9,Miniaturas Arabes,0,https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500,Aroma vibrante y coqueto con notas de orquidea frutos rojos y maracuya.
-29,Karseell Crema Capilar 500ml,25,23,Productos en Tendencia,60,https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=500,Tratamiento intensivo de colageno y maca para reparacion profunda del cabello dañado.
-30,Karseell Aceite Maca 50ml,18,17,Productos en Tendencia,30,https://images.unsplash.com/photo-1608248597263-00079996576b?w=500,Serum concentrado nutritivo que aporta brillo extremo elimina el frizz y protege la fibra.
-31,Airpods Pro 2 Premium,29,27,Productos en Tendencia,30,https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=500,Auriculares inalambricos con excelente calidad de sonido estuche de carga y microfono.
+29,Karseell Crema Capilar 500ml,16,14,Productos en Tendencia,60,https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=500,Tratamiento intensivo de colageno y maca para reparacion profunda del cabello dañado.
+30,Karseell Aceite Maca 50ml,12,11,Productos en Tendencia,30,https://images.unsplash.com/photo-1608248597263-00079996576b?w=500,Serum concentrado nutritivo que aporta brillo extremo elimina el frizz y protege la fibra.
+31,Airpods Pro 2 Premium,19,17,Productos en Tendencia,30,https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=500,Auriculares inalambricos con excelente calidad de sonido estuche de carga y microfono.
 32,Parlante JBL GO4 Simil,14,11,Productos en Tendencia,0,https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500,Parlante bluetooth compacto portatil resistente al agua con graves potentes.
 33,Set Matero Rosa Chicle,24,20,Productos en Tendencia,0,https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=500,Set completo de mate termo de acero y bombilla en tono rosa chicle de alta calidad.
 34,Set Matero Fucsia,24,20,Productos en Tendencia,0,https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=500,Set matero de acero inoxidable termico y moderno en color fucsia brillante.
-35,Khamrah Lattafa 100ml,49,47,Perfumes Masculinos,8,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Gourmand dulce oriental con canela vainilla haba tonka y madera calida especiada.
+35,Khamrah Lattafa 100ml,34,33,Perfumes Masculinos,8,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Gourmand dulce oriental con canela vainilla haba tonka y madera calida especiada.
 36,Erba Gold Mini 25ml,16,11,Miniaturas Arabes,0,https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500,Miniatura premium de fragancia citrica dulce con almizcle blanco y ambar resplandeciente.
 37,La Rouge Baroque Extreme 30ml,15,9,Miniaturas Arabes,0,https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500,Version mas intensa y duradera con notas amaderadas ambaradas profundas y sensuales.
 38,Florenza Mini 30ml,16,9,Miniaturas Arabes,0,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Aroma floral delicado con matices de peonia rosa damascena y almizcle suave.
 39,Pink Velvet 30ml,16,9,Miniaturas Arabes,0,https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500,Fragancia dulce y acartonada con dejos de frutos del bosque y vainilla cremosa.
 40,Man Black Edition 30ml,16,9,Miniaturas Arabes,0,https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=500,Aroma masculino oscuro e intenso con notas de cuero tabaco dulce y especias.
-41,Eclaire Lattafa 100ml,45,43,Perfumes Femeninos,7,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Perfume dulce irresistible con notas de caramelo leche tibia miel y vainilla.
-42,Odyssey Mandarin Sky 100ml,55,53,Perfumes Masculinos,8,https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500,Aroma masculino dulce citrico con mandarina caramelo salado y haba tonka.
+41,Eclaire Lattafa 100ml,35,34,Perfumes Femeninos,7,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Perfume dulce irresistible con notas de caramelo leche tibia miel y vainilla.
+42,Odyssey Mandarin Sky 100ml,36,35,Perfumes Masculinos,8,https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500,Aroma masculino dulce citrico con mandarina caramelo salado y haba tonka.
 43,Rave Now Black 100ml,38,31,Perfumes Masculinos,0,https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500,Perfume frutal potente con notas destacadas de piña fresca musgo y madera ahumada.
-44,Yara Rosa 100ml,45,43,Perfumes Femeninos,10,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Fragancia viral dulce y cremosa con orquidea vainilla y notas atalcadas ultra femeninas.
-45,Yara Candy 100ml,45,43,Perfumes Femeninos,1,https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500,Version golosa y frutal con notas de golosinas frutales jarabe de fresa y vainilla.
+44,Yara Rosa 100ml,31,30,Perfumes Femeninos,10,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Fragancia viral dulce y cremosa con orquidea vainilla y notas atalcadas ultra femeninas.
+45,Yara Candy 100ml,31,30,Perfumes Femeninos,1,https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500,Version golosa y frutal con notas de golosinas frutales jarabe de fresa y vainilla.
 46,Afnan 9PM 100ml,45,36,Perfumes Masculinos,0,https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=500,Perfume masculino nocturno dulce y seductor con manzana canela y vainilla intensa.
-47,Asad Bourbon 100ml,50,41,Perfumes Masculinos,1,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Aroma amaderado calido con notas de bourbon pimienta negra y vainilla especiada.
+47,Asad Bourbon 100ml,50,41,Perfumes Masculinos0,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Aroma amaderado calido con notas de bourbon pimienta negra y vainilla especiada.
 48,Club De Nuit Intense Man 100ml,55,45,Perfumes Masculinos,14,https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500,Clasico de proyeccion alta con notas de limon piña abedul y almizcle ahumado.
 49,Liquid Brun French Avenue 100ml,70,58,Perfumes Masculinos,8,https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500,Perfume gourmet ultra elegante con canela flor de azahar praline y vainilla.
 50,Bharara King 100ml,95,80,Perfumes Masculinos,0,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Fragancia de lujo potente con explosion citrica y fondo amaderado dulce de gran estela.
