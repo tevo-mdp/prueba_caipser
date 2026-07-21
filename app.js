@@ -5,7 +5,7 @@ const URL_CSV_DIRECTO = "https://raw.githubusercontent.com/tevo-mdp/prueba_caips
 const MI_NUMERO_WHATSAPP = "5492235310709"; 
 
 // --- INTERRUPTOR DE PROMOCIÓN MAYORISTA ---
-const ACTIVAR_MAYORISTA = true; // true = Activado, false = Desactivado
+const ACTIVAR_MAYORISTA = false; // true = Activado, false = Desactivado
 const CANTIDAD_MINIMA_MAYORISTA = 5; // Unidades para aplicar el precio por mayor
 
 let productos = [];
