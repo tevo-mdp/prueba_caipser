@@ -34,6 +34,14 @@
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
         .animate-modal { animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        /* Transición suave para el hover de imágenes */
+        .hover-img {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .hover-img:hover {
+            opacity: 0;
+        }
     </style>
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-slate-900 selection:text-white">
@@ -149,61 +157,74 @@
     </main>
 
     <!-- ========================================== -->
-    <!-- MODAL / POPUP INTERACTIVO                  -->
+    <!-- MODAL / POPUP INTERACTIVO CON GALERÍA      -->
     <!-- ========================================== -->
     <div id="modal-detalle" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-sm hidden p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl relative border border-slate-100 animate-modal">
+        <div class="bg-white rounded-3xl max-w-md w-full max-h-[95vh] flex flex-col overflow-hidden shadow-2xl relative border border-slate-100 animate-modal">
             
             <!-- Botón Cerrar (X) -->
             <button onclick="cerrarModal()" class="absolute top-3 right-3 z-10 bg-white/80 hover:bg-white backdrop-blur-md text-slate-600 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-sm transition-all">
                 ✕
             </button>
 
-            <!-- Imagen -->
-            <div class="relative bg-slate-100 h-64 w-full">
-                <img id="modal-imagen" src="" alt="" class="w-full h-full object-cover">
-                <span id="modal-categoria" class="absolute bottom-3 left-3 bg-slate-900/80 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full backdrop-blur-md uppercase tracking-wider"></span>
-            </div>
-
-            <!-- Info -->
-            <div class="p-5 sm:p-6">
-                <div id="modal-stock-badge" class="mb-2"></div>
-                <h3 id="modal-nombre" class="text-lg font-black text-slate-900 leading-snug mb-1"></h3>
-                
-                <!-- Descripción del Producto -->
-                <p id="modal-descripcion" class="text-xs text-slate-500 mb-4 leading-relaxed"></p>
-
-                <!-- Comparativa de Precios -->
-                <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-2xl border border-slate-100 mb-5">
-                    <div class="border-r border-slate-200/60 pr-2">
-                        <p class="text-[10px] text-slate-400 font-semibold uppercase">Minorista (1-4 un.)</p>
-                        <p id="modal-precio-min" class="text-sm font-bold text-slate-500 line-through"></p>
-                    </div>
-                    <div class="pl-2">
-                        <p class="text-[10px] text-emerald-600 font-bold uppercase">Mayorista (5+ un.)</p>
-                        <p id="modal-precio-may" class="text-lg font-black text-emerald-600"></p>
-                    </div>
+            <!-- CONTENEDOR ESCROLEABLE PARA EL MODAL -->
+            <div class="overflow-y-auto flex-grow no-scrollbar pb-6">
+                <!-- Imagen Principal -->
+                <div class="relative bg-slate-100 h-64 w-full shrink-0">
+                    <img id="modal-imagen" src="" alt="" class="w-full h-full object-cover transition-opacity duration-300">
+                    <span id="modal-categoria" class="absolute bottom-3 left-3 bg-slate-900/80 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full backdrop-blur-md uppercase tracking-wider"></span>
                 </div>
 
-                <!-- SELECTOR DE CANTIDAD (INPUT + BOTONES) -->
-                <div class="space-y-1.5">
-                    <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Cantidad a pedir:</label>
-                    <div class="flex items-center gap-3">
-                        <div class="flex items-center border border-slate-200 rounded-xl bg-slate-50 p-1">
-                            <button type="button" onclick="cambiarCantidadModal(-1)" class="w-9 h-9 flex items-center justify-center font-black text-slate-700 hover:bg-white rounded-lg transition-colors text-base select-none">-</button>
-                            <input type="number" id="modal-cantidad" value="1" min="1" oninput="validarCantidadInputModal(this)" class="w-12 text-center text-sm font-black text-slate-900 bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                            <button type="button" onclick="cambiarCantidadModal(1)" class="w-9 h-9 flex items-center justify-center font-black text-slate-700 hover:bg-white rounded-lg transition-colors text-base select-none">+</button>
-                        </div>
+                <!-- Galería de Miniaturas -->
+                <div id="modal-galeria" class="flex gap-2 p-4 overflow-x-auto no-scrollbar border-b border-slate-100">
+                    <!-- Se llenan con JS si hay más de 1 foto -->
+                </div>
 
-                        <div id="modal-btn-container" class="flex-grow">
-                            <!-- Botón inyectado dinámicamente -->
+                <!-- Info -->
+                <div class="p-5 sm:p-6 pb-0">
+                    <div id="modal-stock-badge" class="mb-2"></div>
+                    <h3 id="modal-nombre" class="text-lg font-black text-slate-900 leading-snug mb-1"></h3>
+                    
+                    <!-- Descripción del Producto -->
+                    <p id="modal-descripcion" class="text-xs text-slate-500 mb-4 leading-relaxed"></p>
+
+                    <!-- Comparativa de Precios -->
+                    <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-2xl border border-slate-100 mb-5">
+                        <div class="border-r border-slate-200/60 pr-2">
+                            <p class="text-[10px] text-slate-400 font-semibold uppercase">Minorista (1-4 un.)</p>
+                            <p id="modal-precio-min" class="text-sm font-bold text-slate-500 line-through"></p>
+                        </div>
+                        <div class="pl-2">
+                            <p class="text-[10px] text-emerald-600 font-bold uppercase">Mayorista (5+ un.)</p>
+                            <p id="modal-precio-may" class="text-lg font-black text-emerald-600"></p>
+                        </div>
+                    </div>
+
+                    <!-- SELECTOR DE CANTIDAD (INPUT + BOTONES) -->
+                    <div class="space-y-1.5">
+                        <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Cantidad a pedir:</label>
+                        <div class="flex items-center gap-3">
+                            <div class="flex items-center border border-slate-200 rounded-xl bg-slate-50 p-1">
+                                <button type="button" onclick="cambiarCantidadModal(-1)" class="w-9 h-9 flex items-center justify-center font-black text-slate-700 hover:bg-white rounded-lg transition-colors text-base select-none">-</button>
+                                <input type="number" id="modal-cantidad" value="1" min="1" oninput="validarCantidadInputModal(this)" class="w-12 text-center text-sm font-black text-slate-900 bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                <button type="button" onclick="cambiarCantidadModal(1)" class="w-9 h-9 flex items-center justify-center font-black text-slate-700 hover:bg-white rounded-lg transition-colors text-base select-none">+</button>
+                            </div>
+
+                            <div id="modal-btn-container" class="flex-grow">
+                                <!-- Botón inyectado dinámicamente -->
+                            </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
+            </div> <!-- Fin contenedor escroleable -->
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200/80 py-6 text-center text-xs text-slate-400">
+        <p>© Catálogo Online Mayorista — Actualizado automáticamente</p>
+    </footer>
+
     <!-- JS de la App -->
     <script src="app.js"></script>
 </body>
