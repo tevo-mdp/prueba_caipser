@@ -8,6 +8,9 @@ const MI_NUMERO_WHATSAPP = "5492235310709";
 const ACTIVAR_MAYORISTA = false; // true = Activado, false = Desactivado
 const CANTIDAD_MINIMA_MAYORISTA = 5; // Unidades para aplicar el precio por mayor
 
+// --- UMBRAL FOMO (URGENCIA DE STOCK) ---
+const UMBRAL_STOCK_FOMO = 3; // Dispara el cartel rojo cuando el stock es menor o igual a este número
+
 let productos = [];
 let carrito = []; // Estructura: [{ producto, cantidad }]
 let cotizacionDolar = 1200;
@@ -25,16 +28,15 @@ function configurarInterfaz() {
     if (ACTIVAR_MAYORISTA) {
         document.title = "Catálogo Mayorista Premium";
         if (tituloPrincipal) tituloPrincipal.innerText = "CATÁLOGO MAYORISTA";
-        if (bannerPromo) bannerPromo.style.display = "block"; // Muestra el banner
+        if (bannerPromo) bannerPromo.style.display = "block"; 
         if (textoCant) textoCant.innerText = `${CANTIDAD_MINIMA_MAYORISTA} o más unidades`;
     } else {
         document.title = "Catálogo de Productos";
         if (tituloPrincipal) tituloPrincipal.innerText = "CATÁLOGO DE PRODUCTOS";
-        if (bannerPromo) bannerPromo.style.display = "none"; // Oculta el banner
+        if (bannerPromo) bannerPromo.style.display = "none"; 
     }
 }
 
-// Función para redondear al valor más cercano terminado en 999.99
 function redondearPrecioPsicologico(valor) {
     if (valor <= 0) return 0;
     return Math.round(valor / 1000) * 1000 - 0.01;
@@ -67,7 +69,20 @@ async function CargarCSV() {
             header: true,
             skipEmptyLines: true,
             complete: function(results) {
-                productos = results.data;
+                let datos = results.data.filter(p => p.nombre);
+
+                // ORDENAR POR MAYOR STOCK PRIMERO
+                datos.sort((a, b) => {
+                    const obtenerValorStock = (stockTxt) => {
+                        const txt = (stockTxt || '').toString().toLowerCase().trim();
+                        if (!isNaN(parseInt(txt))) return parseInt(txt); 
+                        if (txt === 'si' || txt === 'disponible') return 9999; 
+                        return 0; 
+                    };
+                    return obtenerValorStock(b.stock) - obtenerValorStock(a.stock);
+                });
+
+                productos = datos;
                 generarBotonesCategorias();
                 filtrarProductos();
             }
@@ -104,7 +119,6 @@ function filtrarProductos() {
     const texto = (document.getElementById('input-busqueda')?.value || '').toLowerCase().trim();
 
     const filtrados = productos.filter(p => {
-        if (!p.nombre) return false;
         const coincideCat = categoriaActiva === "Todas" || p.categoria === categoriaActiva;
         const coincideNombre = p.nombre.toLowerCase().includes(texto);
         return coincideCat && coincideNombre;
@@ -144,10 +158,12 @@ function dibujarProductos(lista) {
             : `<button disabled class="bg-slate-100 text-slate-400 px-3 py-1.5 rounded-xl text-xs font-bold cursor-not-allowed z-20 relative">Agotado</button>`;
 
         let cartelUrgencia = '';
-        if (tieneStock && esStockNumerico && cantidadStock <= 2) {
+        if (tieneStock && esStockNumerico && cantidadStock <= UMBRAL_STOCK_FOMO) {
+            // FOMO Dinámico en el Home (Singular vs Plural)
+            const textoUrgencia = cantidadStock === 1 ? "¡Última unidad!" : "¡Últimas unidades!";
             cartelUrgencia = `
                 <div class="absolute top-2 right-2 z-10 bg-red-600 text-white text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-full shadow-md shadow-red-500/30 animate-pulse">
-                    ¡Últimas unidades!
+                    ${textoUrgencia}
                 </div>
             `;
         }
@@ -265,10 +281,15 @@ function abrirModal(id) {
     const btnContainer = document.getElementById('modal-btn-container');
 
     if (tieneStock) {
-        if (esStockNumerico && cantidadStock <= 2) {
+        // FOMO Dinámico en el Modal (Singular vs Plural)
+        if (esStockNumerico && cantidadStock <= UMBRAL_STOCK_FOMO) {
+            const textoModalUrgencia = cantidadStock === 1 
+                ? "🔥 ¡Solo queda 1 unidad!" 
+                : `🔥 ¡Solo quedan ${cantidadStock} unidades!`;
+
             badgeContainer.innerHTML = `
                 <span class="inline-block bg-red-100 text-red-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-red-200 animate-pulse">
-                    🔥 ¡Solo quedan ${cantidadStock} unidades!
+                    ${textoModalUrgencia}
                 </span>
             `;
         } else {
@@ -431,7 +452,6 @@ function enviarWhatsApp() {
 
     if (!nombre || !direccion) return alert("Por favor, completá Nombre y Dirección.");
 
-    // Cambia el título del WhatsApp dinámicamente
     let msj = ACTIVAR_MAYORISTA ? `📦 *NUEVO PEDIDO MAYORISTA*\n\n` : `📦 *NUEVO PEDIDO*\n\n`;
     msj += `👤 *Cliente:* ${nombre}\n📍 *Dirección:* ${direccion}\n`;
     if (nota) msj += `📝 *Nota:* ${nota}\n`;
