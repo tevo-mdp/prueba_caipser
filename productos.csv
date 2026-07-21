@@ -33,7 +33,7 @@ id,nombre,precio_minorista,precio_mayorista,categoria,stock,imagen,descripcion
 32,Parlante JBL GO4 Simil,14,11,Productos en Tendencia,0,https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500,Parlante bluetooth compacto portatil resistente al agua con graves potentes.
 33,Set Matero Rosa Chicle,24,20,Productos en Tendencia,0,https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=500,Set completo de mate termo de acero y bombilla en tono rosa chicle de alta calidad.
 34,Set Matero Fucsia,24,20,Productos en Tendencia,0,https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=500,Set matero de acero inoxidable termico y moderno en color fucsia brillante.
-35,Khamrah Lattafa 100ml,34,33,Perfumes Masculinos,8,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Gourmand dulce oriental con canela vainilla haba tonka y madera calida especiada.
+35,Khamrah Lattafa 100ml,34,33,Perfumes Masculinos,8,https://i.ibb.co/9knmz88p/PERFUME-LATTAFA-KHAMRAH-CLASICO-100-ML.png,Gourmand dulce oriental con canela vainilla haba tonka y madera calida especiada.
 36,Erba Gold Mini 25ml,16,11,Miniaturas Arabes,0,https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500,Miniatura premium de fragancia citrica dulce con almizcle blanco y ambar resplandeciente.
 37,La Rouge Baroque Extreme 30ml,15,9,Miniaturas Arabes,0,https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500,Version mas intensa y duradera con notas amaderadas ambaradas profundas y sensuales.
 38,Florenza Mini 30ml,16,9,Miniaturas Arabes,0,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Aroma floral delicado con matices de peonia rosa damascena y almizcle suave.
@@ -45,7 +45,7 @@ id,nombre,precio_minorista,precio_mayorista,categoria,stock,imagen,descripcion
 44,Yara Rosa 100ml,31,30,Perfumes Femeninos,10,https://i.ibb.co/CKqSKj2S/PERFUME-LATTAFA-YARA-ROSA-100-ML.png,Fragancia viral dulce y cremosa con orquidea vainilla y notas atalcadas ultra femeninas.
 45,Yara Candy 100ml,31,30,Perfumes Femeninos,1,https://i.ibb.co/ccmSqHyt/PERFUME-LATTAFA-YARA-CANDY-100-ML.png,Version golosa y frutal con notas de golosinas frutales jarabe de fresa y vainilla.
 46,Afnan 9PM 100ml,45,36,Perfumes Masculinos,0,https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=500,Perfume masculino nocturno dulce y seductor con manzana canela y vainilla intensa.
-47,Asad Bourbon 100ml,50,41,Perfumes Masculinos,0,https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500,Aroma amaderado calido con notas de bourbon pimienta negra y vainilla especiada.
+47,Asad Bourbon 100ml,50,41,Perfumes Masculinos,0,https://i.ibb.co/Csb3BFGz/PERFUME-LATTAFA-ASAD-BOURBON-100-ML.pn,Aroma amaderado calido con notas de bourbon pimienta negra y vainilla especiada.
 48,Club De Nuit Intense Man 100ml,55,45,Perfumes Masculinos,14,https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500,Clasico de proyeccion alta con notas de limon piña abedul y almizcle ahumado.
 49,Liquid Brun French Avenue 100ml,70,58,Perfumes Masculinos,8,https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500,Perfume gourmet ultra elegante con canela flor de azahar praline y vainilla.
 50,Bharara King 100ml,95,80,Perfumes Masculinos,0,https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500,Fragancia de lujo potente con explosion citrica y fondo amaderado dulce de gran estela.
