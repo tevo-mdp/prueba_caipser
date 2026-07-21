@@ -150,7 +150,6 @@ function abrirModal(id) {
     document.getElementById('modal-categoria').innerText = prod.categoria || 'Producto';
     document.getElementById('modal-nombre').innerText = prod.nombre;
     
-    // Carga la descripción del CSV
     const elDesc = document.getElementById('modal-descripcion');
     if (elDesc) {
         elDesc.innerText = prod.descripcion || 'Sin descripción disponible.';
@@ -159,7 +158,6 @@ function abrirModal(id) {
     document.getElementById('modal-precio-min').innerText = `$${pMinARS.toLocaleString('es-AR')}`;
     document.getElementById('modal-precio-may').innerText = `$${pMayARS.toLocaleString('es-AR')}`;
 
-    // Resetear cantidad a 1
     const inputCant = document.getElementById('modal-cantidad');
     if (inputCant) inputCant.value = 1;
 
