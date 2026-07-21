@@ -10,6 +10,15 @@ let cotizacionDolar = 1200;
 let categoriaActiva = "Todas";
 let productoModalActual = null;
 
+// Función para redondear al valor más cercano terminado en 999.99
+function redondearPrecioPsicologico(valor) {
+    if (valor <= 0) return 0;
+    // Redondea a los miles más cercanos y le resta 0.01
+    // Ej: 15400 -> 15000 - 0.01 = 14999.99
+    // Ej: 15600 -> 16000 - 0.01 = 15999.99
+    return Math.round(valor / 1000) * 1000 - 0.01;
+}
+
 // ==========================================
 // 1. OBTENER DÓLAR BLUE EN TIEMPO REAL
 // ==========================================
@@ -98,8 +107,11 @@ function dibujarProductos(lista) {
     }
 
     lista.forEach(prod => {
-        const pMinARS = Math.round((parseFloat(prod.precio_minorista) || 0) * cotizacionDolar);
-        const pMayARS = Math.round((parseFloat(prod.precio_mayorista) || 0) * cotizacionDolar);
+        const pMinUSD = parseFloat(prod.precio_minorista) || 0;
+        const pMayUSD = parseFloat(prod.precio_mayorista) || 0;
+        
+        const pMinARS = redondearPrecioPsicologico(pMinUSD * cotizacionDolar);
+        const pMayARS = redondearPrecioPsicologico(pMayUSD * cotizacionDolar);
 
         const stockTxt = (prod.stock || '').toString().toLowerCase().trim();
         const esStockNumerico = !isNaN(parseInt(stockTxt));
@@ -120,8 +132,8 @@ function dibujarProductos(lista) {
                 </div>
                 <div class="flex justify-between items-end border-t border-slate-100 pt-2.5 mt-2">
                     <div>
-                        <p class="text-[10px] line-through text-slate-400">$${pMinARS.toLocaleString('es-AR')}</p>
-                        <p class="font-black text-emerald-600 text-sm">$${pMayARS.toLocaleString('es-AR')} <span class="text-[9px] font-normal text-slate-400">x mayor</span></p>
+                        <p class="text-[10px] line-through text-slate-400">$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}</p>
+                        <p class="font-black text-emerald-600 text-sm">$${pMayARS.toLocaleString('es-AR', {minimumFractionDigits: 2})} <span class="text-[9px] font-normal text-slate-400">x mayor</span></p>
                     </div>
                     ${botonHTML}
                 </div>
@@ -139,8 +151,11 @@ function abrirModal(id) {
 
     productoModalActual = prod;
 
-    const pMinARS = Math.round((parseFloat(prod.precio_minorista) || 0) * cotizacionDolar);
-    const pMayARS = Math.round((parseFloat(prod.precio_mayorista) || 0) * cotizacionDolar);
+    const pMinUSD = parseFloat(prod.precio_minorista) || 0;
+    const pMayUSD = parseFloat(prod.precio_mayorista) || 0;
+
+    const pMinARS = redondearPrecioPsicologico(pMinUSD * cotizacionDolar);
+    const pMayARS = redondearPrecioPsicologico(pMayUSD * cotizacionDolar);
 
     const stockTxt = (prod.stock || '').toString().toLowerCase().trim();
     const esStockNumerico = !isNaN(parseInt(stockTxt));
@@ -155,8 +170,8 @@ function abrirModal(id) {
         elDesc.innerText = prod.descripcion || 'Sin descripción disponible.';
     }
 
-    document.getElementById('modal-precio-min').innerText = `$${pMinARS.toLocaleString('es-AR')}`;
-    document.getElementById('modal-precio-may').innerText = `$${pMayARS.toLocaleString('es-AR')}`;
+    document.getElementById('modal-precio-min').innerText = `$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
+    document.getElementById('modal-precio-may').innerText = `$${pMayARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
 
     const inputCant = document.getElementById('modal-cantidad');
     if (inputCant) inputCant.value = 1;
@@ -246,7 +261,7 @@ function actualizarCarrito() {
     carrito.forEach((item, idx) => {
         const prod = item.producto;
         const pUSD = aplicaMayorista ? parseFloat(prod.precio_mayorista) : parseFloat(prod.precio_minorista);
-        const pARS = Math.round(pUSD * cotizacionDolar);
+        const pARS = redondearPrecioPsicologico(pUSD * cotizacionDolar);
         const subtotal = pARS * item.cantidad;
         totalARS += subtotal;
 
@@ -254,7 +269,7 @@ function actualizarCarrito() {
             <div class="flex items-center justify-between bg-slate-50 p-2 rounded-xl text-xs border border-slate-100">
                 <div class="pr-2 truncate">
                     <p class="font-bold text-slate-800 truncate">${prod.nombre}</p>
-                    <p class="text-[10px] text-slate-400">$${pARS.toLocaleString('es-AR')} c/u</p>
+                    <p class="text-[10px] text-slate-400">$${pARS.toLocaleString('es-AR', {minimumFractionDigits: 2})} c/u</p>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
                     <div class="flex items-center border bg-white rounded-lg px-1">
@@ -268,8 +283,8 @@ function actualizarCarrito() {
         `;
     });
 
-    if (totalEl) totalEl.innerText = totalARS.toLocaleString('es-AR');
-    if (totalMobile) totalMobile.innerText = totalARS.toLocaleString('es-AR');
+    if (totalEl) totalEl.innerText = totalARS.toLocaleString('es-AR', {minimumFractionDigits: 2});
+    if (totalMobile) totalMobile.innerText = totalARS.toLocaleString('es-AR', {minimumFractionDigits: 2});
     if (cantMobile) cantMobile.innerText = totalUnidades;
     if (badgeTotalItems) badgeTotalItems.innerText = `${totalUnidades} item${totalUnidades !== 1 ? 's' : ''}`;
 
@@ -321,14 +336,14 @@ function enviarWhatsApp() {
     carrito.forEach(item => {
         const prod = item.producto;
         const pUSD = aplicaMayorista ? parseFloat(prod.precio_mayorista) : parseFloat(prod.precio_minorista);
-        const pARS = Math.round(pUSD * cotizacionDolar);
+        const pARS = redondearPrecioPsicologico(pUSD * cotizacionDolar);
         const subtotal = pARS * item.cantidad;
         totalARS += subtotal;
 
-        msj += `• ${item.cantidad}x ${prod.nombre} - *$${subtotal.toLocaleString('es-AR')}*\n`;
+        msj += `• ${item.cantidad}x ${prod.nombre} - *$${subtotal.toLocaleString('es-AR', {minimumFractionDigits: 2})}*\n`;
     });
 
-    msj += `\n--------------------------------\n💰 *TOTAL ESTIMADO: $${totalARS.toLocaleString('es-AR')} ARS*`;
+    msj += `\n--------------------------------\n💰 *TOTAL ESTIMADO: $${totalARS.toLocaleString('es-AR', {minimumFractionDigits: 2})} ARS*`;
 
     window.open(`https://wa.me/${MI_NUMERO_WHATSAPP}?text=${encodeURIComponent(msj)}`, '_blank');
 }
