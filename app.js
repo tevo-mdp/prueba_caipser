@@ -4,6 +4,10 @@
 const URL_CSV_DIRECTO = "https://raw.githubusercontent.com/tevo-mdp/prueba_caipser/main/productos.csv"; 
 const MI_NUMERO_WHATSAPP = "5492235310709"; 
 
+// --- INTERRUPTOR DE PROMOCIÓN MAYORISTA ---
+const ACTIVAR_MAYORISTA = false; // true = Activado, false = Desactivado
+const CANTIDAD_MINIMA_MAYORISTA = 5; // Unidades para aplicar el precio por mayor
+
 let productos = [];
 let carrito = []; // Estructura: [{ producto, cantidad }]
 let cotizacionDolar = 1200;
@@ -132,8 +136,16 @@ function dibujarProductos(lista) {
         // Separar múltiples imágenes (divididas por "|")
         const arrayImagenes = (prod.imagen || "").split('|').map(u => u.trim());
         const img1 = arrayImagenes[0] || 'https://via.placeholder.com/300';
-        // Si hay una segunda foto, la usamos para el Hover; si no, repite la primera.
         const img2 = arrayImagenes.length > 1 ? arrayImagenes[1] : img1;
+
+        // Texto de precio variable según si el descuento está activo
+        const bloquePrecioMayorista = ACTIVAR_MAYORISTA 
+            ? `<p class="font-black text-emerald-600 text-sm">$${pMayARS.toLocaleString('es-AR', {minimumFractionDigits: 2})} <span class="text-[9px] font-normal text-slate-400">x mayor</span></p>` 
+            : `<p class="font-black text-slate-900 text-sm">$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}</p>`;
+
+        const bloquePrecioMinorista = ACTIVAR_MAYORISTA 
+            ? `<p class="text-[10px] line-through text-slate-400">$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}</p>` 
+            : ``;
 
         contenedor.innerHTML += `
             <div onclick="abrirModal('${prod.id}')" class="bg-white p-3.5 sm:p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-slate-300 transition-all group relative">
@@ -151,8 +163,8 @@ function dibujarProductos(lista) {
                 </div>
                 <div class="flex justify-between items-end border-t border-slate-100 pt-2.5 mt-2">
                     <div>
-                        <p class="text-[10px] line-through text-slate-400">$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}</p>
-                        <p class="font-black text-emerald-600 text-sm">$${pMayARS.toLocaleString('es-AR', {minimumFractionDigits: 2})} <span class="text-[9px] font-normal text-slate-400">x mayor</span></p>
+                        ${bloquePrecioMinorista}
+                        ${bloquePrecioMayorista}
                     </div>
                     ${botonHTML}
                 </div>
@@ -188,11 +200,11 @@ function abrirModal(id) {
     
     // Generar Galería de Miniaturas
     const galeriaContenedor = document.getElementById('modal-galeria');
-    galeriaContenedor.innerHTML = ""; // Limpiar
+    galeriaContenedor.innerHTML = ""; 
     
     if (arrayImagenes.length > 1) {
         galeriaContenedor.classList.remove('hidden');
-        arrayImagenes.forEach((imgSrc, index) => {
+        arrayImagenes.forEach((imgSrc) => {
             galeriaContenedor.innerHTML += `
                 <button onclick="cambiarFotoModal('${imgSrc}')" class="w-14 h-14 shrink-0 rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-900 focus:border-slate-900 transition-all bg-slate-100">
                     <img src="${imgSrc}" class="w-full h-full object-cover">
@@ -200,7 +212,7 @@ function abrirModal(id) {
             `;
         });
     } else {
-        galeriaContenedor.classList.add('hidden'); // Ocultar si solo hay 1 foto
+        galeriaContenedor.classList.add('hidden'); 
     }
 
     document.getElementById('modal-categoria').innerText = prod.categoria || 'Producto';
@@ -209,8 +221,14 @@ function abrirModal(id) {
     const elDesc = document.getElementById('modal-descripcion');
     if (elDesc) elDesc.innerText = prod.descripcion || 'Sin descripción disponible.';
 
-    document.getElementById('modal-precio-min').innerText = `$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
-    document.getElementById('modal-precio-may').innerText = `$${pMayARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
+    // Adaptar precios en el Modal si el mayorista está activo o inactivo
+    if (ACTIVAR_MAYORISTA) {
+        document.getElementById('modal-precio-min').innerText = `$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
+        document.getElementById('modal-precio-may').innerText = `$${pMayARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
+        document.getElementById('modal-precio-min').parentElement.parentElement.style.display = 'grid';
+    } else {
+        document.getElementById('modal-precio-min').parentElement.parentElement.style.display = 'none'; // Oculta bloque de comparación
+    }
 
     const inputCant = document.getElementById('modal-cantidad');
     if (inputCant) inputCant.value = 1;
@@ -219,7 +237,6 @@ function abrirModal(id) {
     const btnContainer = document.getElementById('modal-btn-container');
 
     if (tieneStock) {
-        // Chequeo de Stock Bajo en el Modal
         if (esStockNumerico && cantidadStock <= 2) {
             badgeContainer.innerHTML = `
                 <span class="inline-block bg-red-100 text-red-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-red-200 animate-pulse">
@@ -238,10 +255,9 @@ function abrirModal(id) {
     document.getElementById('modal-detalle').classList.remove('hidden');
 }
 
-// Cambiar la foto principal del modal al tocar una miniatura
 function cambiarFotoModal(url) {
     const fotoPrincipal = document.getElementById('modal-imagen');
-    fotoPrincipal.style.opacity = '0.5'; // Pequeño efecto visual
+    fotoPrincipal.style.opacity = '0.5'; 
     setTimeout(() => {
         fotoPrincipal.src = url;
         fotoPrincipal.style.opacity = '1';
@@ -313,7 +329,8 @@ function actualizarCarrito() {
     lista.innerHTML = "";
 
     const totalUnidades = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-    const aplicaMayorista = totalUnidades >= 5;
+    // Aplicar descuento solo si está activado y llega al mínimo
+    const aplicaMayorista = ACTIVAR_MAYORISTA && (totalUnidades >= CANTIDAD_MINIMA_MAYORISTA);
     let totalARS = 0;
 
     carrito.forEach((item, idx) => {
@@ -347,13 +364,18 @@ function actualizarCarrito() {
     if (badgeTotalItems) badgeTotalItems.innerText = `${totalUnidades} item${totalUnidades !== 1 ? 's' : ''}`;
 
     if (avisoEl) {
-        if (aplicaMayorista) {
-            avisoEl.innerText = "¡Precios mayoristas aplicados!";
-            avisoEl.className = "text-xs font-bold text-emerald-700 mb-4 bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-center";
+        if (!ACTIVAR_MAYORISTA) {
+            avisoEl.style.display = 'none'; // Ocultar el aviso si la función está apagada
         } else {
-            const faltantes = 5 - totalUnidades;
-            avisoEl.innerText = `Llevá ${faltantes} un. más para precio mayorista.`;
-            avisoEl.className = "text-xs font-semibold text-amber-800 mb-4 bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-center";
+            avisoEl.style.display = 'block';
+            if (aplicaMayorista) {
+                avisoEl.innerText = "¡Precios mayoristas aplicados!";
+                avisoEl.className = "text-xs font-bold text-emerald-700 mb-4 bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-center";
+            } else {
+                const faltantes = CANTIDAD_MINIMA_MAYORISTA - totalUnidades;
+                avisoEl.innerText = `Llevá ${faltantes} un. más para precio mayorista.`;
+                avisoEl.className = "text-xs font-semibold text-amber-800 mb-4 bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-center";
+            }
         }
     }
 }
@@ -382,13 +404,14 @@ function enviarWhatsApp() {
 
     if (!nombre || !direccion) return alert("Por favor, completá Nombre y Dirección.");
 
-    let msj = `📦 *NUEVO PEDIDO MAYORISTA*\n\n`;
+    let msj = `📦 *NUEVO PEDIDO*\n\n`;
     msj += `👤 *Cliente:* ${nombre}\n📍 *Dirección:* ${direccion}\n`;
     if (nota) msj += `📝 *Nota:* ${nota}\n`;
     msj += `\n--------------------------------\n\n🛒 *Detalle del Pedido:*\n`;
 
     const totalUnidades = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-    const aplicaMayorista = totalUnidades >= 5;
+    // Aplicar descuento solo si está activado y llega al mínimo
+    const aplicaMayorista = ACTIVAR_MAYORISTA && (totalUnidades >= CANTIDAD_MINIMA_MAYORISTA);
     let totalARS = 0;
 
     carrito.forEach(item => {
