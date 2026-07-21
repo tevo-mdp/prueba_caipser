@@ -1,17 +1,3 @@
-// Función para transformar links de Google Drive en imágenes directas
-function formatearImagenUrl(url) {
-    if (!url) return 'https://via.placeholder.com/300';
-    
-    // Si es un enlace de Google Drive, extraemos el ID de la foto
-    if (url.includes('drive.google.com')) {
-        const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-        if (match && match[1]) {
-            // Este servidor de Google sí entrega la imagen directa para la web:
-            return `https://lh3.googleusercontent.com/d/${match[1]}`;
-        }
-    }
-    return url;
-}
 // ==========================================
 // CONFIGURACIÓN INICIAL
 // ==========================================
