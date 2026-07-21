@@ -5,7 +5,7 @@ const URL_CSV_DIRECTO = "https://raw.githubusercontent.com/tevo-mdp/prueba_caips
 const MI_NUMERO_WHATSAPP = "5492235310709"; 
 
 // --- INTERRUPTOR DE PROMOCIÓN MAYORISTA ---
-const ACTIVAR_MAYORISTA = false; // true = Activado, false = Desactivado
+const ACTIVAR_MAYORISTA = true; // true = Activado, false = Desactivado
 const CANTIDAD_MINIMA_MAYORISTA = 5; // Unidades para aplicar el precio por mayor
 
 let productos = [];
@@ -13,6 +13,26 @@ let carrito = []; // Estructura: [{ producto, cantidad }]
 let cotizacionDolar = 1200;
 let categoriaActiva = "Todas";
 let productoModalActual = null;
+
+// ==========================================
+// FUNCIÓN PARA ACTUALIZAR HTML DINÁMICO
+// ==========================================
+function configurarInterfaz() {
+    const tituloPrincipal = document.getElementById('titulo-principal');
+    const bannerPromo = document.getElementById('banner-promocional');
+    const textoCant = document.getElementById('texto-cantidad-mayorista');
+    
+    if (ACTIVAR_MAYORISTA) {
+        document.title = "Catálogo Mayorista Premium";
+        if (tituloPrincipal) tituloPrincipal.innerText = "CATÁLOGO MAYORISTA";
+        if (bannerPromo) bannerPromo.style.display = "block"; // Muestra el banner
+        if (textoCant) textoCant.innerText = `${CANTIDAD_MINIMA_MAYORISTA} o más unidades`;
+    } else {
+        document.title = "Catálogo de Productos";
+        if (tituloPrincipal) tituloPrincipal.innerText = "CATÁLOGO DE PRODUCTOS";
+        if (bannerPromo) bannerPromo.style.display = "none"; // Oculta el banner
+    }
+}
 
 // Función para redondear al valor más cercano terminado en 999.99
 function redondearPrecioPsicologico(valor) {
@@ -94,7 +114,7 @@ function filtrarProductos() {
 }
 
 // ==========================================
-// 4. RENDERIZAR PRODUCTOS EN GRILLA (HOVER EFECT & URGENCIA)
+// 4. RENDERIZAR PRODUCTOS EN GRILLA
 // ==========================================
 function dibujarProductos(lista) {
     const contenedor = document.getElementById('contenedor-productos');
@@ -123,7 +143,6 @@ function dibujarProductos(lista) {
             ? `<button onclick="event.stopPropagation(); agregarAlCarrito('${prod.id}', 1)" class="bg-slate-900 hover:bg-slate-800 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-transform active:scale-95 z-20 relative">Sumar</button>`
             : `<button disabled class="bg-slate-100 text-slate-400 px-3 py-1.5 rounded-xl text-xs font-bold cursor-not-allowed z-20 relative">Agotado</button>`;
 
-        // Etiqueta de Urgencia (Stock Bajo)
         let cartelUrgencia = '';
         if (tieneStock && esStockNumerico && cantidadStock <= 2) {
             cartelUrgencia = `
@@ -133,15 +152,13 @@ function dibujarProductos(lista) {
             `;
         }
 
-        // Separar múltiples imágenes (divididas por "|")
         const arrayImagenes = (prod.imagen || "").split('|').map(u => u.trim());
         const img1 = arrayImagenes[0] || 'https://via.placeholder.com/300';
         const img2 = arrayImagenes.length > 1 ? arrayImagenes[1] : img1;
 
-        // Texto de precio variable según si el descuento está activo
         const bloquePrecioMayorista = ACTIVAR_MAYORISTA 
             ? `<p class="font-black text-emerald-600 text-sm">$${pMayARS.toLocaleString('es-AR', {minimumFractionDigits: 2})} <span class="text-[9px] font-normal text-slate-400">x mayor</span></p>` 
-            : `<p class="font-black text-slate-900 text-sm">$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}</p>`;
+            : `<p class="font-black text-emerald-600 text-sm">$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}</p>`;
 
         const bloquePrecioMinorista = ACTIVAR_MAYORISTA 
             ? `<p class="text-[10px] line-through text-slate-400">$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}</p>` 
@@ -149,11 +166,8 @@ function dibujarProductos(lista) {
 
         contenedor.innerHTML += `
             <div onclick="abrirModal('${prod.id}')" class="bg-white p-3.5 sm:p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-slate-300 transition-all group relative">
-                
                 ${cartelUrgencia}
-
                 <div>
-                    <!-- Contenedor con efecto Hover para la foto 2 -->
                     <div class="relative overflow-hidden rounded-xl bg-slate-50 mb-3 h-36 sm:h-44 group-hover:scale-105 transition-transform duration-300">
                         <img src="${img2}" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'">
                         <img src="${img1}" class="absolute inset-0 w-full h-full object-cover hover-img bg-slate-50" onerror="this.src='https://via.placeholder.com/300'">
@@ -174,7 +188,7 @@ function dibujarProductos(lista) {
 }
 
 // ==========================================
-// 5. POPUP CON GALERÍA DE MINIATURAS
+// 5. POPUP MODAL
 // ==========================================
 function abrirModal(id) {
     const prod = productos.find(p => p.id.toString() === id.toString());
@@ -193,12 +207,10 @@ function abrirModal(id) {
     const cantidadStock = esStockNumerico ? parseInt(stockTxt) : 0;
     const tieneStock = esStockNumerico ? cantidadStock > 0 : (stockTxt === 'si' || stockTxt === 'disponible');
 
-    // Procesar imágenes
     const arrayImagenes = (prod.imagen || "").split('|').map(u => u.trim());
     const fotoPrincipal = document.getElementById('modal-imagen');
     fotoPrincipal.src = arrayImagenes[0] || 'https://via.placeholder.com/300';
     
-    // Generar Galería de Miniaturas
     const galeriaContenedor = document.getElementById('modal-galeria');
     galeriaContenedor.innerHTML = ""; 
     
@@ -221,13 +233,29 @@ function abrirModal(id) {
     const elDesc = document.getElementById('modal-descripcion');
     if (elDesc) elDesc.innerText = prod.descripcion || 'Sin descripción disponible.';
 
-    // Adaptar precios en el Modal si el mayorista está activo o inactivo
+    const contenedorPreciosModal = document.getElementById('contenedor-precios-modal');
     if (ACTIVAR_MAYORISTA) {
-        document.getElementById('modal-precio-min').innerText = `$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
-        document.getElementById('modal-precio-may').innerText = `$${pMayARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
-        document.getElementById('modal-precio-min').parentElement.parentElement.style.display = 'grid';
+        contenedorPreciosModal.classList.add('grid', 'grid-cols-2');
+        contenedorPreciosModal.classList.remove('flex', 'justify-center');
+        contenedorPreciosModal.innerHTML = `
+            <div class="border-r border-slate-200/60 pr-2">
+                <p class="text-[10px] text-slate-400 font-semibold uppercase">Minorista</p>
+                <p id="modal-precio-min" class="text-sm font-bold text-slate-500 line-through">$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}</p>
+            </div>
+            <div class="pl-2">
+                <p class="text-[10px] text-emerald-600 font-bold uppercase">Mayorista</p>
+                <p id="modal-precio-may" class="text-lg font-black text-emerald-600">$${pMayARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}</p>
+            </div>
+        `;
     } else {
-        document.getElementById('modal-precio-min').parentElement.parentElement.style.display = 'none'; // Oculta bloque de comparación
+        contenedorPreciosModal.classList.remove('grid', 'grid-cols-2');
+        contenedorPreciosModal.classList.add('flex', 'justify-center', 'text-center');
+        contenedorPreciosModal.innerHTML = `
+            <div>
+                <p class="text-[10px] text-emerald-600 font-bold uppercase">Precio Unitario</p>
+                <p id="modal-precio-may" class="text-2xl font-black text-emerald-600">$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}</p>
+            </div>
+        `;
     }
 
     const inputCant = document.getElementById('modal-cantidad');
@@ -329,7 +357,6 @@ function actualizarCarrito() {
     lista.innerHTML = "";
 
     const totalUnidades = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-    // Aplicar descuento solo si está activado y llega al mínimo
     const aplicaMayorista = ACTIVAR_MAYORISTA && (totalUnidades >= CANTIDAD_MINIMA_MAYORISTA);
     let totalARS = 0;
 
@@ -365,7 +392,7 @@ function actualizarCarrito() {
 
     if (avisoEl) {
         if (!ACTIVAR_MAYORISTA) {
-            avisoEl.style.display = 'none'; // Ocultar el aviso si la función está apagada
+            avisoEl.style.display = 'none'; 
         } else {
             avisoEl.style.display = 'block';
             if (aplicaMayorista) {
@@ -404,13 +431,13 @@ function enviarWhatsApp() {
 
     if (!nombre || !direccion) return alert("Por favor, completá Nombre y Dirección.");
 
-    let msj = `📦 *NUEVO PEDIDO*\n\n`;
+    // Cambia el título del WhatsApp dinámicamente
+    let msj = ACTIVAR_MAYORISTA ? `📦 *NUEVO PEDIDO MAYORISTA*\n\n` : `📦 *NUEVO PEDIDO*\n\n`;
     msj += `👤 *Cliente:* ${nombre}\n📍 *Dirección:* ${direccion}\n`;
     if (nota) msj += `📝 *Nota:* ${nota}\n`;
     msj += `\n--------------------------------\n\n🛒 *Detalle del Pedido:*\n`;
 
     const totalUnidades = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-    // Aplicar descuento solo si está activado y llega al mínimo
     const aplicaMayorista = ACTIVAR_MAYORISTA && (totalUnidades >= CANTIDAD_MINIMA_MAYORISTA);
     let totalARS = 0;
 
@@ -429,5 +456,8 @@ function enviarWhatsApp() {
     window.open(`https://wa.me/${MI_NUMERO_WHATSAPP}?text=${encodeURIComponent(msj)}`, '_blank');
 }
 
-// Iniciar app al cargar la página
-document.addEventListener('DOMContentLoaded', CargarCSV);
+// Iniciar app al cargar la página configurando todo primero
+document.addEventListener('DOMContentLoaded', () => {
+    configurarInterfaz();
+    CargarCSV();
+});
