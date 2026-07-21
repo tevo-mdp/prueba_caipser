@@ -13,9 +13,6 @@ let productoModalActual = null;
 // Función para redondear al valor más cercano terminado en 999.99
 function redondearPrecioPsicologico(valor) {
     if (valor <= 0) return 0;
-    // Redondea a los miles más cercanos y le resta 0.01
-    // Ej: 15400 -> 15000 - 0.01 = 14999.99
-    // Ej: 15600 -> 16000 - 0.01 = 15999.99
     return Math.round(valor / 1000) * 1000 - 0.01;
 }
 
@@ -93,7 +90,7 @@ function filtrarProductos() {
 }
 
 // ==========================================
-// 4. RENDERIZAR PRODUCTOS EN GRILLA
+// 4. RENDERIZAR PRODUCTOS EN GRILLA (HOVER EFECT)
 // ==========================================
 function dibujarProductos(lista) {
     const contenedor = document.getElementById('contenedor-productos');
@@ -118,14 +115,22 @@ function dibujarProductos(lista) {
         const tieneStock = esStockNumerico ? parseInt(stockTxt) > 0 : (stockTxt === 'si' || stockTxt === 'disponible');
 
         const botonHTML = tieneStock 
-            ? `<button onclick="event.stopPropagation(); agregarAlCarrito('${prod.id}', 1)" class="bg-slate-900 hover:bg-slate-800 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-transform active:scale-95">Sumar</button>`
-            : `<button disabled class="bg-slate-100 text-slate-400 px-3 py-1.5 rounded-xl text-xs font-bold cursor-not-allowed">Agotado</button>`;
+            ? `<button onclick="event.stopPropagation(); agregarAlCarrito('${prod.id}', 1)" class="bg-slate-900 hover:bg-slate-800 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-transform active:scale-95 z-20 relative">Sumar</button>`
+            : `<button disabled class="bg-slate-100 text-slate-400 px-3 py-1.5 rounded-xl text-xs font-bold cursor-not-allowed z-20 relative">Agotado</button>`;
+
+        // Separar múltiples imágenes (divididas por "|")
+        const arrayImagenes = (prod.imagen || "").split('|').map(u => u.trim());
+        const img1 = arrayImagenes[0] || 'https://via.placeholder.com/300';
+        // Si hay una segunda foto, la usamos para el Hover; si no, repite la primera.
+        const img2 = arrayImagenes.length > 1 ? arrayImagenes[1] : img1;
 
         contenedor.innerHTML += `
             <div onclick="abrirModal('${prod.id}')" class="bg-white p-3.5 sm:p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-slate-300 transition-all group">
                 <div>
-                    <div class="overflow-hidden rounded-xl bg-slate-50 mb-3 h-36 sm:h-44">
-                        <img src="${prod.imagen}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://via.placeholder.com/300'">
+                    <!-- Contenedor con efecto Hover para la foto 2 -->
+                    <div class="relative overflow-hidden rounded-xl bg-slate-50 mb-3 h-36 sm:h-44 group-hover:scale-105 transition-transform duration-300">
+                        <img src="${img2}" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'">
+                        <img src="${img1}" class="absolute inset-0 w-full h-full object-cover hover-img bg-slate-50" onerror="this.src='https://via.placeholder.com/300'">
                     </div>
                     <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">${prod.categoria || 'General'}</span>
                     <h3 class="font-bold text-slate-900 text-xs sm:text-sm leading-snug mb-2 group-hover:text-emerald-600 transition-colors line-clamp-2">${prod.nombre}</h3>
@@ -143,7 +148,7 @@ function dibujarProductos(lista) {
 }
 
 // ==========================================
-// 5. POPUP / MODAL INTERACTIVO
+// 5. POPUP CON GALERÍA DE MINIATURAS
 // ==========================================
 function abrirModal(id) {
     const prod = productos.find(p => p.id.toString() === id.toString());
@@ -161,14 +166,33 @@ function abrirModal(id) {
     const esStockNumerico = !isNaN(parseInt(stockTxt));
     const tieneStock = esStockNumerico ? parseInt(stockTxt) > 0 : (stockTxt === 'si' || stockTxt === 'disponible');
 
-    document.getElementById('modal-imagen').src = prod.imagen;
+    // Procesar imágenes
+    const arrayImagenes = (prod.imagen || "").split('|').map(u => u.trim());
+    const fotoPrincipal = document.getElementById('modal-imagen');
+    fotoPrincipal.src = arrayImagenes[0] || 'https://via.placeholder.com/300';
+    
+    // Generar Galería de Miniaturas
+    const galeriaContenedor = document.getElementById('modal-galeria');
+    galeriaContenedor.innerHTML = ""; // Limpiar
+    
+    if (arrayImagenes.length > 1) {
+        galeriaContenedor.classList.remove('hidden');
+        arrayImagenes.forEach((imgSrc, index) => {
+            galeriaContenedor.innerHTML += `
+                <button onclick="cambiarFotoModal('${imgSrc}')" class="w-14 h-14 shrink-0 rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-900 focus:border-slate-900 transition-all bg-slate-100">
+                    <img src="${imgSrc}" class="w-full h-full object-cover">
+                </button>
+            `;
+        });
+    } else {
+        galeriaContenedor.classList.add('hidden'); // Ocultar si solo hay 1 foto
+    }
+
     document.getElementById('modal-categoria').innerText = prod.categoria || 'Producto';
     document.getElementById('modal-nombre').innerText = prod.nombre;
     
     const elDesc = document.getElementById('modal-descripcion');
-    if (elDesc) {
-        elDesc.innerText = prod.descripcion || 'Sin descripción disponible.';
-    }
+    if (elDesc) elDesc.innerText = prod.descripcion || 'Sin descripción disponible.';
 
     document.getElementById('modal-precio-min').innerText = `$${pMinARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
     document.getElementById('modal-precio-may').innerText = `$${pMayARS.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
@@ -188,6 +212,16 @@ function abrirModal(id) {
     }
 
     document.getElementById('modal-detalle').classList.remove('hidden');
+}
+
+// Cambiar la foto principal del modal al tocar una miniatura
+function cambiarFotoModal(url) {
+    const fotoPrincipal = document.getElementById('modal-imagen');
+    fotoPrincipal.style.opacity = '0.5'; // Pequeño efecto visual
+    setTimeout(() => {
+        fotoPrincipal.src = url;
+        fotoPrincipal.style.opacity = '1';
+    }, 150);
 }
 
 function cambiarCantidadModal(delta) {
