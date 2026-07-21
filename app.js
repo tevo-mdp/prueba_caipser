@@ -90,7 +90,7 @@ function filtrarProductos() {
 }
 
 // ==========================================
-// 4. RENDERIZAR PRODUCTOS EN GRILLA (HOVER EFECT)
+// 4. RENDERIZAR PRODUCTOS EN GRILLA (HOVER EFECT & URGENCIA)
 // ==========================================
 function dibujarProductos(lista) {
     const contenedor = document.getElementById('contenedor-productos');
@@ -112,11 +112,22 @@ function dibujarProductos(lista) {
 
         const stockTxt = (prod.stock || '').toString().toLowerCase().trim();
         const esStockNumerico = !isNaN(parseInt(stockTxt));
-        const tieneStock = esStockNumerico ? parseInt(stockTxt) > 0 : (stockTxt === 'si' || stockTxt === 'disponible');
+        const cantidadStock = esStockNumerico ? parseInt(stockTxt) : 0;
+        const tieneStock = esStockNumerico ? cantidadStock > 0 : (stockTxt === 'si' || stockTxt === 'disponible');
 
         const botonHTML = tieneStock 
             ? `<button onclick="event.stopPropagation(); agregarAlCarrito('${prod.id}', 1)" class="bg-slate-900 hover:bg-slate-800 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-transform active:scale-95 z-20 relative">Sumar</button>`
             : `<button disabled class="bg-slate-100 text-slate-400 px-3 py-1.5 rounded-xl text-xs font-bold cursor-not-allowed z-20 relative">Agotado</button>`;
+
+        // Etiqueta de Urgencia (Stock Bajo)
+        let cartelUrgencia = '';
+        if (tieneStock && esStockNumerico && cantidadStock <= 2) {
+            cartelUrgencia = `
+                <div class="absolute top-2 right-2 z-10 bg-red-600 text-white text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-full shadow-md shadow-red-500/30 animate-pulse">
+                    ¡Últimas unidades!
+                </div>
+            `;
+        }
 
         // Separar múltiples imágenes (divididas por "|")
         const arrayImagenes = (prod.imagen || "").split('|').map(u => u.trim());
@@ -125,7 +136,10 @@ function dibujarProductos(lista) {
         const img2 = arrayImagenes.length > 1 ? arrayImagenes[1] : img1;
 
         contenedor.innerHTML += `
-            <div onclick="abrirModal('${prod.id}')" class="bg-white p-3.5 sm:p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-slate-300 transition-all group">
+            <div onclick="abrirModal('${prod.id}')" class="bg-white p-3.5 sm:p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-slate-300 transition-all group relative">
+                
+                ${cartelUrgencia}
+
                 <div>
                     <!-- Contenedor con efecto Hover para la foto 2 -->
                     <div class="relative overflow-hidden rounded-xl bg-slate-50 mb-3 h-36 sm:h-44 group-hover:scale-105 transition-transform duration-300">
@@ -164,7 +178,8 @@ function abrirModal(id) {
 
     const stockTxt = (prod.stock || '').toString().toLowerCase().trim();
     const esStockNumerico = !isNaN(parseInt(stockTxt));
-    const tieneStock = esStockNumerico ? parseInt(stockTxt) > 0 : (stockTxt === 'si' || stockTxt === 'disponible');
+    const cantidadStock = esStockNumerico ? parseInt(stockTxt) : 0;
+    const tieneStock = esStockNumerico ? cantidadStock > 0 : (stockTxt === 'si' || stockTxt === 'disponible');
 
     // Procesar imágenes
     const arrayImagenes = (prod.imagen || "").split('|').map(u => u.trim());
@@ -204,7 +219,16 @@ function abrirModal(id) {
     const btnContainer = document.getElementById('modal-btn-container');
 
     if (tieneStock) {
-        badgeContainer.innerHTML = `<span class="inline-block bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">● En Stock</span>`;
+        // Chequeo de Stock Bajo en el Modal
+        if (esStockNumerico && cantidadStock <= 2) {
+            badgeContainer.innerHTML = `
+                <span class="inline-block bg-red-100 text-red-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-red-200 animate-pulse">
+                    🔥 ¡Solo quedan ${cantidadStock} unidades!
+                </span>
+            `;
+        } else {
+            badgeContainer.innerHTML = `<span class="inline-block bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">● En Stock</span>`;
+        }
         btnContainer.innerHTML = `<button onclick="confirmarAgregarModal()" class="w-full bg-slate-900 text-white py-2.5 rounded-xl font-bold text-xs hover:bg-slate-800 transition-all active:scale-95 shadow-sm">Agregar al Pedido</button>`;
     } else {
         badgeContainer.innerHTML = `<span class="inline-block bg-red-50 text-red-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-red-200">● Agotado</span>`;
