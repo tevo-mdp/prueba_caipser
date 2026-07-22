@@ -52,11 +52,12 @@ id,nombre,precio_minorista,precio_mayorista,categoria,stock,imagen,descripcion
 51,Cámara de Seguridad Foco Wifi,13,12,Productos en Tendencia,20,https://i.ibb.co/43SzQT6/CAMARA-DE-SEGURIDAD-FOCO.png,COMPLETAR INFORMACION.
 52,Cargador Cabezal Apple Original 20W Tipo C Ficha Americana (Patas Rectas),29,28,Productos en Tendencia,10,https://i.ibb.co/hF1ZgWB1/CARGADOR-ORIGINAL-APPLE-20-W-FICHA-ESTADOUNIDENSE-PATAS-RECTAS.png,COMPLETAR INFORMACION.
 53,Auriculares Airpods Pro 2 Calidad Premium,19,17,Productos en Tendencia,30,https://i.ibb.co/Cs8L20pY/AURICULARES-AIRPODS-2-PRO-LINEA-PREMIUM.png,Auriculares inalambricos con excelente calidad de sonido estuche de carga y microfono.
-54,Auriculares Xiaomi Buds 6 Play (Negro-Blanco-Rosa),16,15,Productos en Tendencia,10,https://i.ibb.co/RkwVV3Yn/AURICULARES-BUDS-6-PLAY.png,Auriculares inalambricos con excelente calidad de sonido estuche de carga y microfono.
-55,Auriculares Xiaomi Buds 8 Lite (Negro-Blanco),27,26,Productos en Tendencia,8,https://i.ibb.co/6dsJHbZ/AURICULARES-BUDS-8-LITE.png,Auriculares inalambricos con excelente calidad de sonido estuche de carga y microfono.
-56,Repetidor Extensor Wifi Tp-Link RE200 AC750 Dual Band (2.4/5.8),25,24,Productos en Tendencia,4,https://i.ibb.co/FL9xxxPm/REPETIDOR-EXTENSOR-WIFI-TPLINK-RE200-AC750-DUAL-BAND.png,Fácil de instalar - Soporta velocidades de hasta 750Mbps.
-57,Parlante JBL Flip 7,110,109,Productos en Tendencia,0,https://i.ibb.co/Q3F99DV8/PARLANTE-JBL-FLIP-7.png,Parlante bluetooth compacto portatil resistente al agua con graves potentes.
-58,Amazon Echo Dot Alexa 5ta Generación,69,68,Productos en Tendencia,1,https://i.ibb.co/HDf6Qmhv/AMAZON-ECHO-DOT-ALEXA-5-TA-GENERACION.png,Modelo Nuevo & Mejorado - Multiples Funciones.
-59,Mini Masajeador Eléctrico Corporal Multifuncional,5,4,Productos en Tendencia,20,https://i.ibb.co/5WDDzC0R/MINI-MASAJEADOR-ELECTRICO-PARCHE.png,Tipo Parche - 8 Modos de Masaje - Recargable - Ideal Deportistas.
-60,Termo Stanley Mate System 1.2lts (Color Toast),99,98,Productos en Tendencia,1,https://i.ibb.co/rKyXVxXC/TERMO-STANLEY-MATE-SYSTEM-1-2-LTS-COLOR-TOAST.png,COMPLETAR INFORMACION.
-61,Anafe Eléctrico Smartfy Quemador Espiral 1000W,15,1,Hogar,8,https://i.ibb.co/nNm3LXZX/ANAFE-ELECTRICO-SMARTFY-QUEMADOR-ESPIRAL-1000-W.png,COMPLETAR INFORMACION.
+54,Auriculares Vincha Jbl Tune T520BT Bluetooth,41,40,Productos en Tendencia,0,https://i.ibb.co/9HRYxLv0/AURICULAR-JBL-T520-T-BLUETOOTH.png,Producto Original Importado.
+55,Auriculares Xiaomi Buds 6 Play (Negro-Blanco-Rosa),16,15,Productos en Tendencia,10,https://i.ibb.co/RkwVV3Yn/AURICULARES-BUDS-6-PLAY.png,Auriculares inalambricos con excelente calidad de sonido estuche de carga y microfono.
+56,Auriculares Xiaomi Buds 8 Lite (Negro-Blanco),27,26,Productos en Tendencia,8,https://i.ibb.co/6dsJHbZ/AURICULARES-BUDS-8-LITE.png,Auriculares inalambricos con excelente calidad de sonido estuche de carga y microfono.
+57,Repetidor Extensor Wifi Tp-Link RE200 AC750 Dual Band (2.4/5.8),25,24,Productos en Tendencia,4,https://i.ibb.co/FL9xxxPm/REPETIDOR-EXTENSOR-WIFI-TPLINK-RE200-AC750-DUAL-BAND.png,Fácil de instalar - Soporta velocidades de hasta 750Mbps.
+58,Parlante JBL Flip 7,110,109,Productos en Tendencia,0,https://i.ibb.co/Q3F99DV8/PARLANTE-JBL-FLIP-7.png,Parlante bluetooth compacto portatil resistente al agua con graves potentes.
+59,Amazon Echo Dot Alexa 5ta Generación,69,68,Productos en Tendencia,1,https://i.ibb.co/HDf6Qmhv/AMAZON-ECHO-DOT-ALEXA-5-TA-GENERACION.png,Modelo Nuevo & Mejorado - Multiples Funciones.
+60,Mini Masajeador Eléctrico Corporal Multifuncional,5,4,Productos en Tendencia,20,https://i.ibb.co/5WDDzC0R/MINI-MASAJEADOR-ELECTRICO-PARCHE.png,Tipo Parche - 8 Modos de Masaje - Recargable - Ideal Deportistas.
+61,Termo Stanley Mate System 1.2lts (Color Toast),99,98,Productos en Tendencia,1,https://i.ibb.co/rKyXVxXC/TERMO-STANLEY-MATE-SYSTEM-1-2-LTS-COLOR-TOAST.png,COMPLETAR INFORMACION.
+62,Anafe Eléctrico Smartfy Quemador Espiral 1000W,15,1,Hogar,8,https://i.ibb.co/nNm3LXZX/ANAFE-ELECTRICO-SMARTFY-QUEMADOR-ESPIRAL-1000-W.png,COMPLETAR INFORMACION.
