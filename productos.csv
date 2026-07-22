@@ -24,8 +24,8 @@ id,nombre,precio_minorista,precio_mayorista,categoria,stock,imagen,descripcion
 23,Perfume Lattafa Emaan EDP (100ml),31,30,Perfumes Femeninos,0,,COMPLETAR DESCRIPCION.
 24,Perfume Armaf Odyssey Mandarin Sky EDP (100ml),36,35,Perfumes Masculinos,8,https://i.ibb.co/5hCBd1Y5/PERFUME-ARMAF-ODYSSEY-MANDARIN-SKY.png,Aroma masculino dulce citrico con mandarina caramelo salado y haba tonka.
 25,Perfume Afnan 9PM EDP (100ml),41,40,Perfumes Masculinos,0,https://i.ibb.co/gbGxQfvz/PERFUME-AFNAN-9-PM-CLASICO-100-ML.png,Perfume masculino nocturno dulce y seductor con manzana canela y vainilla intensa.
-26,Bharara King 100ml,55,54,Perfumes Masculinos,0,https://i.ibb.co/JwzgXnGg/PERFUME-BHARARA-KING-100-ML-EDP.png,Fragancia de lujo potente con explosion citrica y fondo amaderado dulce de gran estela.
-27,Crema Capilar Karseell 500ml,16,14,Productos en Tendencia,60,https://i.ibb.co/wrPWQQC5/KARSEEL-CREMA-CLASICA.png,Tratamiento intensivo de colageno y maca para reparacion profunda del cabello dañado.
-28,Oleo Aceite Maca Karseell 50ml,12,11,Productos en Tendencia,30,https://i.ibb.co/60kvDtXw/KARSEELL-OLEO-CLASICO.png,Serum concentrado nutritivo que aporta brillo extremo elimina el frizz y protege la fibra.
+26,Perfume Bharara King EDP (100ml),55,54,Perfumes Masculinos,0,https://i.ibb.co/JwzgXnGg/PERFUME-BHARARA-KING-100-ML-EDP.png,Fragancia de lujo potente con explosion citrica y fondo amaderado dulce de gran estela.
+27,Crema Capilar Karseell Power Collagen 500ml (Linea Clásica),16,14,Productos en Tendencia,60,https://i.ibb.co/wrPWQQC5/KARSEEL-CREMA-CLASICA.png,Tratamiento intensivo de colageno y maca para reparacion profunda del cabello dañado.
+28,Oleo Aceite Capilar Karseell 50ml (Linea Clásica),12,11,Productos en Tendencia,30,https://i.ibb.co/60kvDtXw/KARSEELL-OLEO-CLASICO.png,Serum concentrado nutritivo que aporta brillo extremo elimina el frizz y protege la fibra.
 29,Auriculares Airpods Pro 2 Calidad Premium,19,17,Productos en Tendencia,30,https://i.ibb.co/Cs8L20pY/AURICULARES-AIRPODS-2-PRO-LINEA-PREMIUM.png,Auriculares inalambricos con excelente calidad de sonido estuche de carga y microfono.
 30,Parlante JBL Flip 7,119,118,Productos en Tendencia,0,https://i.ibb.co/Q3F99DV8/PARLANTE-JBL-FLIP-7.png,Parlante bluetooth compacto portatil resistente al agua con graves potentes.
