@@ -7,10 +7,10 @@ id,nombre,precio_minorista,precio_mayorista,categoria,stock,imagen,descripcion
 6,Body Splash VS - Amber Romance (250ml),20,19,Body Splash,5,https://i.ibb.co/VWycRGnw/VICTORIA-SECRET-BODY-SPLASH-AMBER-ROMANCE-CLASICO-250-ML.png,Notas profundas de ambar y crema inglesa. Aroma calido acogedor y envolvente.
 7,Body Splash VS - Bare Vanilla (250ml),20,19,Body Splash,5,https://i.ibb.co/DHMh91g2/VICTORIA-SECRET-BODY-SPLASH-BARE-VAINILLA-CLASICO-250-ML.png,Vainilla batida y cashmere suave. Una fragancia dulce reconfortante y moderna.
 8,Body Splash VS - Pure Seduction (250ml),20,19,Body Splash,5,https://i.ibb.co/ynTQXDSP/VICTORIA-SECRET-BODY-SPLASH-PURE-SEDUCTION-CLASICO-250-ML.png,Aroma frutal intenso con ciruela roja exprimida y peonia dulce.
-9,Body Splash VS - Rush (250ml),20,19,Body Splash,5,,COMPLETAR DESCRIPCION.
-10,Body Splash VS - Aqua Kiss (250ml),20,19,Body Splash,5,,COMPLETAR DESCRIPCION.
-11,Body Splash VS - Romantic (250ml),20,19,Body Splash,5,,COMPLETAR DESCRIPCION.
-12,Body Splash VS - Aqua Kiss Shimmer (250ml),20,19,Body Splash,5,,COMPLETAR DESCRIPCION.
+9,Body Splash VS - Rush (250ml),20,19,Body Splash,5,https://i.ibb.co/yctKKgvq/VICTORIA-SECRET-BODY-SPLASH-RUSH-CLASICO-250-ML.png,COMPLETAR DESCRIPCION.
+10,Body Splash VS - Aqua Kiss (250ml),20,19,Body Splash,5,https://i.ibb.co/zHNvKhSV/VICTORIA-SECRET-BODY-SPLASH-AQUA-KISS-CLASICO-250-ML.png,COMPLETAR DESCRIPCION.
+11,Body Splash VS - Romantic (250ml),20,19,Body Splash,5,https://i.ibb.co/rfN5w9Vp/VICTORIA-SECRET-BODY-SPLASH-ROMANTIC-CLASICO-250-ML.png,COMPLETAR DESCRIPCION.
+12,Body Splash VS - Aqua Kiss Shimmer (250ml),20,19,Body Splash,5,https://i.ibb.co/v4pYDDWZ/BODY-SPLASH-VS-AQUA-KISS-SHIMMER-250-ML.png,COMPLETAR DESCRIPCION.
 13,Perfume Lattafa Khamrah Clásico EDP (100ml),34,33,Perfumes Masculinos,8,https://i.ibb.co/9knmz88p/PERFUME-LATTAFA-KHAMRAH-CLASICO-100-ML.png,Gourmand dulce oriental con canela vainilla haba tonka y madera calida especiada.
 14,Perfume Lattafa Khamrah Qahwa EDP (100ml),35,34,Perfumes Masculinos,0,https://i.ibb.co/93m70CSS/PERFUME-LATTAFA-KHAMRAH-QAHWA-100-ML.png,Aroma calido e intenso de cafe tostado canela y especias dulces orientales.
 15,Perfume Lattafa Asad Bourbon EDP (100ml),38,37,Perfumes Masculinos,0,https://i.ibb.co/Csb3BFGz/PERFUME-LATTAFA-ASAD-BOURBON-100-ML.png,Aroma amaderado calido con notas de bourbon pimienta negra y vainilla especiada.
