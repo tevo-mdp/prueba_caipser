@@ -38,8 +38,26 @@ function configurarInterfaz() {
 }
 
 function redondearPrecioPsicologico(valor) {
-    if (valor <= 0) return 0;
-    return Math.round(valor / 1000) * 1000 - 0.01;
+    if (isNaN(valor) || valor <= 0) return 0;
+
+    const abs = Math.abs(valor);
+    let unidad;
+    if (abs >= 1000) unidad = 1000;
+    else if (abs >= 100) unidad = 100;
+    else if (abs >= 10) unidad = 10;
+    else if (abs >= 1) unidad = 1;
+    else if (abs >= 0.1) unidad = 0.1;
+    else if (abs >= 0.01) unidad = 0.01;
+    else unidad = 0.001;
+
+    // Redondeamos según la unidad seleccionada
+    const redondeado = Math.round(valor / unidad) * unidad;
+
+    // Restamos un pequeño "delta" para lograr el efecto psicologico (.99 / .49 / .099, ...)
+    const delta = unidad >= 1 ? 0.01 : unidad * 0.1;
+    const psicologico = Math.max(0, Number((redondeado - delta).toFixed(2)));
+
+    return psicologico;
 }
 
 // ==========================================
