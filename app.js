@@ -35,31 +35,12 @@ function configurarInterfaz() {
         if (tituloPrincipal) tituloPrincipal.innerText = "CATÁLOGO DE PRODUCTOS";
         if (bannerPromo) bannerPromo.style.display = "none"; 
     }
-}
 
 function redondearPrecioPsicologico(valor) {
-    if (isNaN(valor) || valor <= 0) return 0;
-
-    const abs = Math.abs(valor);
-
-    // Calcula una unidad dinámica en función del orden de magnitud
-    // Ej: 2.5  -> unidad = 0.1
-    //     50   -> unidad = 1
-    //     1200 -> unidad = 100
-    let unidad = Math.pow(1000, Math.floor(Math.log10(abs))) / 1000;
-    unidad = Math.max(unidad, 0.001); // límite inferior para evitar 0
-
-    // Redondeamos según la unidad seleccionada
-    const redondeado = Math.round(valor / unidad) * unidad;
-
-    // Delta proporcional a la unidad (más lógico para rangos grandes)
-    const delta = unidad >= 1 ? unidad * 0.01 : unidad * 0.1;
-
-    // Formateamos a 2 decimales para uso monetario (puedes cambiar si necesitas más precisión)
-    const psicologico = Math.max(0, Number((redondeado - delta).toFixed(2)));
-
-    return psicologico;
+    if (valor <= 0) return 0;
+    return Math.round(valor / 1000) * 1000 - 0.01;
 }
+
 
 // ==========================================
 // 1. OBTENER DÓLAR BLUE EN TIEMPO REAL
