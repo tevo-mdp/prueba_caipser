@@ -35,12 +35,12 @@ function configurarInterfaz() {
         if (tituloPrincipal) tituloPrincipal.innerText = "CATÁLOGO DE PRODUCTOS";
         if (bannerPromo) bannerPromo.style.display = "none"; 
     }
+}
 
 function redondearPrecioPsicologico(valor) {
     if (valor <= 0) return 0;
     return Math.round(valor / 1000) * 1000 - 0.01;
 }
-
 
 // ==========================================
 // 1. OBTENER DÓLAR BLUE EN TIEMPO REAL
