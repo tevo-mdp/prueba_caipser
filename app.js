@@ -46,7 +46,7 @@ function redondearPrecioPsicologico(valor) {
     // Ej: 2.5  -> unidad = 0.1
     //     50   -> unidad = 1
     //     1200 -> unidad = 100
-    let unidad = Math.pow(10, Math.floor(Math.log10(abs))) / 10;
+    let unidad = Math.pow(1000, Math.floor(Math.log10(abs))) / 1000;
     unidad = Math.max(unidad, 0.001); // límite inferior para evitar 0
 
     // Redondeamos según la unidad seleccionada
