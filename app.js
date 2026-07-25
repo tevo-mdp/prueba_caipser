@@ -41,20 +41,21 @@ function redondearPrecioPsicologico(valor) {
     if (isNaN(valor) || valor <= 0) return 0;
 
     const abs = Math.abs(valor);
-    let unidad;
-    if (abs >= 1000) unidad = 1000;
-    else if (abs >= 100) unidad = 100;
-    else if (abs >= 10) unidad = 10;
-    else if (abs >= 1) unidad = 1;
-    else if (abs >= 0.1) unidad = 0.1;
-    else if (abs >= 0.01) unidad = 0.01;
-    else unidad = 0.001;
+
+    // Calcula una unidad dinámica en función del orden de magnitud
+    // Ej: 2.5  -> unidad = 0.1
+    //     50   -> unidad = 1
+    //     1200 -> unidad = 100
+    let unidad = Math.pow(10, Math.floor(Math.log10(abs))) / 10;
+    unidad = Math.max(unidad, 0.001); // límite inferior para evitar 0
 
     // Redondeamos según la unidad seleccionada
     const redondeado = Math.round(valor / unidad) * unidad;
 
-    // Restamos un pequeño "delta" para lograr el efecto psicologico (.99 / .49 / .099, ...)
-    const delta = unidad >= 1 ? 0.01 : unidad * 0.1;
+    // Delta proporcional a la unidad (más lógico para rangos grandes)
+    const delta = unidad >= 1 ? unidad * 0.01 : unidad * 0.1;
+
+    // Formateamos a 2 decimales para uso monetario (puedes cambiar si necesitas más precisión)
     const psicologico = Math.max(0, Number((redondeado - delta).toFixed(2)));
 
     return psicologico;
